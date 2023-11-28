@@ -39,15 +39,6 @@ class SQLAlchemyRepository:
             logger.error(f"Failed to save data: {e}")
             raise e
 
-    # async def delete(self, model, session: AsyncSession) -> bool:
-    #     try:
-    #         async with session.begin():
-    #             session.delete(model)
-    #         return True
-    #     except SQLAlchemyError as e:
-    #         logger.error(f"Failed to delete data: {e}")
-    #         raise e
-
     async def find_all(self, model_type, session: AsyncSession, **kwargs):
         stmt = select(model_type).filter_by(**kwargs)
         result = await session.execute(stmt)
@@ -57,3 +48,12 @@ class SQLAlchemyRepository:
         stmt = select(model_type).filter_by(**kwargs)
         result = await session.execute(stmt)
         return result.scalar()
+    
+     # async def delete(self, model, session: AsyncSession) -> bool:
+    #     try:
+    #         async with session.begin():
+    #             session.delete(model)
+    #         return True
+    #     except SQLAlchemyError as e:
+    #         logger.error(f"Failed to delete data: {e}")
+    #         raise e
