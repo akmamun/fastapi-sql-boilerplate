@@ -44,7 +44,7 @@ services:
       - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/fast_api_sql_db
     # command : ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "app:app", "-b", "0.0.0.0:8000", "-w", "4"]
 
-    command: ["uvicorn", "app:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+    command: ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
     restart: always
     networks:
       - fastapi-network

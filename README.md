@@ -18,7 +18,7 @@ This repository provides a template for building a FastAPI microservice using Do
 ### Run Locally
 - To run the service locally, use the following command:
     ```sh
-    uvicorn server:app --reload
+    uvicorn main:app --reload
     ```
 ### Run with Docker
 - To run the service using Docker, use the following command:
@@ -33,24 +33,29 @@ This repository provides a template for building a FastAPI microservice using Do
 
 ├── app_name
 │   ├── controllers
-│   │   └── controller.py
+│   │   ├── __init__.py
+│   │   └── item_controller.py
 │   ├── models
 │   │   └── item_models.py
 │   ├── repositories
-│   └── routes
-│       └── routers.py
-├── app.py
+│   │   ├── __init__.py
+│   │   └── item_repository.py
+│   ├── routes.py
+│   └── tests
 ├── config
 │   ├── config.py
 │   └── db.py
 ├── db
-│   ├── BaseRepository.py
-│   └── database.py
+│   └── alchemy_repository.py
 ├── docker-compose.yml
 ├── Dockerfile
 ├── helpers
 │   ├── env.py
 │   └── pagination.py
-├── Locust.py
-└── requirements.txt
+├── locust.py
+├── main.py
+├── README.md
+├── requirements.txt
+└── scripts
+    └── migrate.py
 ```
