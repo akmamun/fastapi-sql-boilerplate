@@ -30,27 +30,31 @@ This repository provides a template for building a FastAPI microservice using Do
 
 ## Project Structure
 ```
-
 ├── app_name
 │   ├── controllers
-│   │   └── controller.py
+│   │   ├── __init__.py
+│   │   ├── item_controller.py
 │   ├── models
-│   │   └── item_models.py
+│   │   ├── item_models.py
 │   ├── repositories
-│   └── routes
-│       └── routers.py
+│   │   ├── __init__.py
+│   │   ├── item_repository.py
+│   ├── routes.py
+│   └── tests
 ├── app.py
 ├── config
 │   ├── config.py
 │   └── db.py
 ├── db
-│   ├── BaseRepository.py
-│   └── database.py
+│   ├── alchemy_repository.py
 ├── docker-compose.yml
 ├── Dockerfile
 ├── helpers
 │   ├── env.py
 │   └── pagination.py
-├── Locust.py
-└── requirements.txt
+├── locust.py
+├── README.md
+├── requirements.txt
+└── scripts
+    └── migrate.py
 ```
