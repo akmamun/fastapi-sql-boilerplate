@@ -2,12 +2,16 @@ import random
 import string
 from locust import HttpUser, task, between
 
+import random
+from locust import HttpUser, task, between
+
 class BoilerplateAPILoadTest(HttpUser):
     wait_time = between(1, 2.5)
 
     @task
     def get_items(self):
-        self.client.get("/v1/items")
+        item_id = random.randint(1000, 1005)
+        self.client.get(f"/v1/items/{item_id}")
 
     # @task
     # def write_item(self):
