@@ -1,0 +1,57 @@
+version: '3'
+services:
+  db:
+    image: postgres:15.3
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=fast_api_sql_db
+    
+    # command: ["-c", "max_connections=50"] 
+    volumes:
+       - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - fastapi-network
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+  #     - PGADMIN_DEFAULT_PASSWORD=admin
+  #   ports:
+  #     - "5050:5050"
+  #   depends_on:
+  #     - db
+  #   restart: always
+  #   networks:
+  #     - fastapi-network
+
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/fast_api_sql_db
+    # command : ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "app:app", "-b", "0.0.0.0:8000", "-w", "4"]
+
+    command: ["uvicorn", "app:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+    restart: always
+    networks:
+      - fastapi-network
+
+networks:
+  fastapi-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
