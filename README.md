@@ -30,13 +30,12 @@ This repository provides a template for building a FastAPI microservice using Do
 
 ## Project Structure
 ```
-
 ├── app_name
 │   ├── controllers
 │   │   ├── __init__.py
 │   │   └── item_controller.py
 │   ├── models
-│   │   └── item_models.py
+│   │   ├── item_models.py
 │   ├── repositories
 │   │   ├── __init__.py
 │   │   └── item_repository.py
