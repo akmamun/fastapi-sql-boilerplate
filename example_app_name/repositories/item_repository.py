@@ -1,8 +1,5 @@
-from app_name.models.item_models import Item
 from db.alchemy_repository import SQLAlchemyRepository
-
-from app_name.models.item_models import Item
-from db.alchemy_repository import SQLAlchemyRepository
+from example_app_name.models.item_models import Item
 
 class ItemRepository(SQLAlchemyRepository):
     def __init__(self):

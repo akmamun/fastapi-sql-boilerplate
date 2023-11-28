@@ -1,8 +1,4 @@
 import random
-import string
-from locust import HttpUser, task, between
-
-import random
 from locust import HttpUser, task, between
 
 class BoilerplateAPILoadTest(HttpUser):
@@ -10,7 +6,7 @@ class BoilerplateAPILoadTest(HttpUser):
 
     @task
     def get_items(self):
-        item_id = random.randint(1000, 1005)
+        item_id = random.randint(1, 3000)
         self.client.get(f"/v1/items/{item_id}")
 
     # @task

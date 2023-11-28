@@ -1,8 +1,7 @@
-from fastapi import Depends, HTTPException, Request, status
+from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app_name.repositories.item_repository import ItemRepository
+from example_app_name.repositories.item_repository import ItemRepository
 
 class ItemController:
     def __init__(self):
