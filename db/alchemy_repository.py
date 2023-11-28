@@ -12,17 +12,22 @@ logger = logging.getLogger(__name__)
 
 
 class SQLAlchemyRepository:
-    def __init__(self, async_engine, session_local):
-        self.async_engine = async_engine
-        self.session_local = session_local
+    def __init__(self):
+        self.async_engine = None
+        self.session_local = None
 
-    @classmethod
-    def create_async_engine_session(cls) -> Tuple[AsyncEngine, AsyncSession]:
-        async_engine = create_async_engine(**config()['db']['default'])
-        async_session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
-        return async_engine, async_session
+    def create_async_engine_session(self) -> Tuple[AsyncEngine, sessionmaker]:
+        if self.async_engine is None or self.session_local is None:
+            self.async_engine = create_async_engine(**config()['db']['default'])
+            self.session_local = sessionmaker(self.async_engine, class_=AsyncSession, expire_on_commit=False)
+        return self.async_engine, self.session_local
+
+    def initialize(self):
+        self.create_async_engine_session()
 
     def get_session(self) -> AsyncSession:
+        if self.async_engine is None or self.session_local is None:
+            self.initialize()
         return self.session_local()
 
     async def save(self, model, session: AsyncSession) -> bool:
