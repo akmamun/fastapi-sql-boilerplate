@@ -1,10 +1,9 @@
 import logging
+from typing import Tuple, Union
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncEngine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.declarative import DeclarativeMeta
-from typing import Tuple, List, Optional, Union
 from config.config import config
 from sqlalchemy.future import select
 

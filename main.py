@@ -6,9 +6,9 @@ app = FastAPI(routes=routers)
 
 # Add more apps by importing their routers and appending to the apps list
 # from another_app_name.routes import routers as another_app_routers
-# apps = [example_routers, another_app_routers]
+# all_routes = [example_routers, another_app_routers]
 
-# app = FastAPI(routes=example_routers)
+# app = FastAPI(routes=all_routes)
 
 # CORS settings
 origins = [
