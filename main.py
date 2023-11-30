@@ -1,3 +1,5 @@
+import logging
+from config.config import config
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from example_app_name.routes import routers
@@ -25,6 +27,9 @@ app.add_middleware(
 )
 
 
-
 if __name__ == "__main__":
-    app.run(app, host="0.0.0.0", port=8000)
+    host = config['http']['host']
+    port = config['http']['port']
+
+    app.run(app, host=host, port=port)
+    logging.info("Server started. Listening on %s:%s", host, port)
